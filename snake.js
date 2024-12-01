@@ -9,15 +9,35 @@ let food = {
   y: Math.floor(Math.random() * (canvas.height / boxSize)) * boxSize,
 };
 
-// Listen for key presses
-document.addEventListener("keydown", changeDirection);
+let gameStarted = false; // Flag to check if the game has started
 
-function changeDirection(event) {
+// Listen for key presses
+document.addEventListener("keydown", handleKeyPress);
+
+function handleKeyPress(event) {
   const key = event.keyCode;
-  if (key === 37 && direction !== "RIGHT") direction = "LEFT";
-  else if (key === 38 && direction !== "DOWN") direction = "UP";
-  else if (key === 39 && direction !== "LEFT") direction = "RIGHT";
-  else if (key === 40 && direction !== "UP") direction = "DOWN";
+
+  if (!gameStarted && key === 32) {
+    // Start the game when Spacebar is pressed
+    gameStarted = true;
+    gameLoop(); // Begin the game loop
+    return;
+  }
+
+  if (gameStarted) {
+    // Handle snake direction
+    if (key === 37 && direction !== "RIGHT") direction = "LEFT";
+    else if (key === 38 && direction !== "DOWN") direction = "UP";
+    else if (key === 39 && direction !== "LEFT") direction = "RIGHT";
+    else if (key === 40 && direction !== "UP") direction = "DOWN";
+  }
+}
+
+function drawStartScreen() {
+  ctx.fillStyle = "white";
+  ctx.font = "20px Arial";
+  ctx.textAlign = "center";
+  ctx.fillText("Press SPACE to Start", canvas.width / 2, canvas.height / 2);
 }
 
 function drawSnake() {
@@ -53,7 +73,7 @@ function moveSnake() {
     head.x >= canvas.width ||
     head.y < 0 ||
     head.y >= canvas.height ||
-    snake.slice(1).some(segment => segment.x === head.x && segment.y === head.y)
+    snake.slice(1).some((segment) => segment.x === head.x && segment.y === head.y)
   ) {
     alert("Game Over!");
     document.location.reload();
@@ -66,11 +86,14 @@ function drawFood() {
 }
 
 function gameLoop() {
+  if (!gameStarted) return; // Stop loop until the game starts
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   drawFood();
   drawSnake();
   moveSnake();
+
+  setTimeout(gameLoop, 100); // Schedule the next frame
 }
 
-// Run the game loop every 100 milliseconds
-setInterval(gameLoop, 100);
+// Initial screen
+drawStartScreen();
