@@ -4,9 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>x2Beef's Mancave</title>
-     <!-- Favicon -->
-     <link rel="icon" type="image/png" href="favicon.png">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="favicon.png">
 
     <style>
         body {
@@ -47,169 +46,152 @@
             font-size: 1.2em;
             margin-top: 40px;
         }
+
         .youtube-btn {
-    background-color: #FF0000; /* YouTube red color */
-    color: white;
-    padding: 10px 20px;
-    text-decoration: none;
-    font-size: 1.2em;
-    border-radius: 5px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    position: fixed;   /* Fixed position on screen */
-    top: 80px;         /* 10px from the top */
-    right: 20px;       /* 10px from the right */
-    z-index: 1000;  
-}
+            background-color: #FF0000; /* YouTube red color */
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-size: 1.2em;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            position: fixed;   /* Fixed position on screen */
+            top: 80px;         /* 10px from the top */
+            right: 20px;       /* 10px from the right */
+            z-index: 1000;  
+        }
 
-.youtube-btn:hover {
-    background-color: #cc0000; /* Slightly darker red on hover */
-
-}
-
+        .youtube-btn:hover {
+            background-color: #cc0000; /* Slightly darker red on hover */
+        }
 
         .social-btn {
-    background-color: #87CEEB; /* YouTube red color */
-    color: white;
-    padding: 10px 20px;
-    text-decoration: none;
-    font-size: 1.2em;
-    border-radius: 5px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    position: fixed;   /* Fixed position on screen */
-    top: 140px;         /* 10px from the top */
-    right: 20px;       /* 10px from the right */
-    z-index: 1000;  
-}
-
-.social-btn:hover {
-    background-color: #87CEEB; /* Slightly darker red on hover */
-}
-        
-        .snake-btn {
-    background-color: #87CEEB; /* YouTube red color */
-    color: white;
-    padding: 10px 20px;
-    text-decoration: none;
-    font-size: 1.2em;
-    border-radius: 5px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    position: fixed;   /* Fixed position on screen */
-    top: 200px;         /* 10px from the top */
-    right: 20px;       /* 10px from the right */
-    z-index: 1000;  
-}
-
-
-.snake-btn:hover {
-    background-color: #87CEEB; /* Slightly darker red on hover */
-
-}
-        
-        .download-btn {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            padding: 15px 30px;
-            background-color: #4CAF50;  /* Green background */
+            background-color: #87CEEB; /* Sky blue color */
             color: white;
-            text-align: center;
+            padding: 10px 20px;
             text-decoration: none;
+            font-size: 1.2em;
             border-radius: 5px;
-            font-size: 16px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            position: fixed;   /* Fixed position on screen */
+            top: 140px;         /* 10px from the top */
+            right: 20px;       /* 10px from the right */
+            z-index: 1000;  
         }
 
-        /* Change the background color on hover */
-        .download-btn:hover {
-            background-color: #45a049;
+        .social-btn:hover {
+            background-color: #87CEEB; /* Slightly darker red on hover */
         }
 
- .navbar {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        background-color: rgba(0, 0, 0, 0.8); /* Dark, semi-transparent */
-        color: white;
-        display: flex;
-        justify-content: space-between; /* Space between brand and links */
-        align-items: center;
-        padding: 10px 20px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-        z-index: 1000; /* Ensure it's above other content */
-    }
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.8); /* Dark, semi-transparent */
+            color: white;
+            display: flex;
+            justify-content: space-between; /* Space between brand and links */
+            align-items: center;
+            padding: 10px 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            z-index: 1000; /* Ensure it's above other content */
+        }
 
-    .navbar-brand {
-        font-size: 1.8em;
-        font-weight: bold;
-        color: white;
-    }
+        .navbar-brand {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: white;
+        }
 
-    .navbar-links {
-        display: flex; /* Align links horizontally */
-    }
+        .navbar-links {
+            display: flex; /* Align links horizontally */
+        }
 
-    .navbar .nav-btn {
-        color: white;
-        text-decoration: none;
-        font-size: 1.2em;
-        padding: 10px 20px;
-        margin: 0 5px; /* Add spacing between buttons */
-        border-radius: 5px;
-        background-color: #4CAF50; /* Green color */
-        transition: background-color 0.3s ease;
-    }
+        .navbar .nav-btn {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2em;
+            padding: 10px 20px;
+            margin: 0 5px; /* Add spacing between buttons */
+            border-radius: 5px;
+            background-color: #4CAF50; /* Green color */
+            transition: background-color 0.3s ease;
+        }
 
-    .navbar .nav-btn:hover {
-        background-color: #45a049; /* Darker green on hover */
-    }
+        .navbar .nav-btn:hover {
+            background-color: #45a049; /* Darker green on hover */
+        }
 
-    /* Ensure the body starts below the fixed navbar */
-    body {
-        margin: 0;
-        padding-top: 70px; /* Adjust to match navbar height */
-    }
-</style>
+        /* Ensure the body starts below the fixed navbar */
+        body {
+            margin: 0;
+            padding-top: 70px; /* Adjust to match navbar height */
+        }
 
+        /* Mobile Styles */
+        @media screen and (max-width: 768px) {
+            .navbar-links {
+                display: none; /* Hide the menu by default */
+                flex-direction: column;
+                text-align: center;
+                background-color: rgba(0, 0, 0, 0.8); /* Dark background */
+                position: absolute;
+                top: 60px; /* Adjust the top position for the dropdown */
+                width: 100%;
+                left: 0;
+            }
 
-    
+            .navbar-links.show {
+                display: flex; /* Show the menu when the "show" class is added */
+            }
+
+            .menu-toggle {
+                display: block; /* Show the hamburger icon on mobile */
+                background-color: transparent;
+                border: none;
+                font-size: 30px;
+                color: white;
+                cursor: pointer;
+            }
+
+            .navbar-links a {
+                padding: 10px;
+                font-size: 1.2em;
+            }
+        }
+    </style>
 </head>
 <body>
 
-    
-<div class="navbar">
-    <div class="navbar-brand">x2Beef's Mancave</div>
-    <button class="menu-toggle">☰</button> <!-- Hamburger menu -->
-    <div class="navbar-links">
-        <a href="downloads.html" class="nav-btn">Go to Downloads</a>
-        <a href="socials.html" class="nav-btn">Go to All Socials</a>
-        <a href="snake.html" class="nav-btn">Go to Snake for KBM</a>
-        <a href="https://www.youtube.com/@x2Beef" target="_blank" class="nav-btn">Visit My YouTube Channel</a>
+    <div class="navbar">
+        <div class="navbar-brand">x2Beef's Mancave</div>
+        <button class="menu-toggle">☰</button> <!-- Hamburger menu -->
+        <div class="navbar-links">
+            <a href="downloads.html" class="nav-btn">Go to Downloads</a>
+            <a href="socials.html" class="nav-btn">Go to All Socials</a>
+            <a href="snake.html" class="nav-btn">Go to Snake for KBM</a>
+            <a href="https://www.youtube.com/@x2Beef" target="_blank" class="nav-btn">Visit My YouTube Channel</a>
+        </div>
     </div>
-</div>
 
-      <script>
+    <script>
         // Toggle the visibility of the navbar links when hamburger is clicked
         document.querySelector('.menu-toggle').addEventListener('click', function() {
             document.querySelector('.navbar-links').classList.toggle('show');
         });
     </script>
-    
+
     <div class="container">
         <h1>x2Beef's mancave!</h1>
         <p>This page is being hosted by GitHub Pages for x2Beef.</p>
         <p>All code can be found @ github.com/techcraftyt/techcraftyt.github.io</p>
 
-
         <!-- Local image -->
-<iframe width="560" height="315" 
-        src="https://www.youtube.com/embed/9QHxD22oLjI" 
-        frameborder="0" allowfullscreen>
-</iframe>
-
-
-   
-
-
+        <iframe width="560" height="315" 
+            src="https://www.youtube.com/embed/9QHxD22oLjI" 
+            frameborder="0" allowfullscreen>
+        </iframe>
     </div>
 
     <div class="footer">
