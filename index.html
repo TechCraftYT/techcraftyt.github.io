@@ -6,6 +6,8 @@
     <title>x2Beef's Mancave</title>
      <!-- Favicon -->
      <link rel="icon" type="image/png" href="favicon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -181,6 +183,47 @@
     
 </head>
 <body>
+/* General styles for larger screens */
+body {
+    font-size: 16px;
+}
+
+.navbar .nav-btn {
+    padding: 10px 20px;
+    font-size: 1em;
+}
+
+/* Styles for mobile screens (max width: 768px) */
+@media screen and (max-width: 768px) {
+    /* Adjust body font size */
+    body {
+        font-size: 14px;
+    }
+
+    /* Stack navbar items vertically */
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start; /* Align buttons to the left */
+        padding: 10px;
+    }
+
+    .navbar-brand {
+        font-size: 1.5em;
+        margin-bottom: 10px; /* Add spacing below the title */
+    }
+
+    .navbar-links {
+        flex-direction: column; /* Stack links vertically */
+        width: 100%; /* Take up full width */
+    }
+
+    .navbar .nav-btn {
+        padding: 10px;
+        width: 100%; /* Buttons stretch to fit */
+        text-align: left; /* Align text to the left */
+        margin: 5px 0; /* Add spacing between buttons */
+    }
+}
 
     <div class="container">
         <h1>x2Beef's mancave!</h1>
