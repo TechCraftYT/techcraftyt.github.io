@@ -121,29 +121,37 @@
             background-color: #45a049;
         }
 
-        <style>
-    /* Navigation Bar Styles */
-    .navbar {
+ .navbar {
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
-        background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent black */
+        background-color: rgba(0, 0, 0, 0.8); /* Dark, semi-transparent */
+        color: white;
         display: flex;
-        justify-content: center;
+        justify-content: space-between; /* Space between brand and links */
         align-items: center;
-        padding: 10px 0;
+        padding: 10px 20px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-        z-index: 1000; /* Keep it above everything else */
+        z-index: 1000; /* Ensure it's above other content */
     }
 
-    /* Navigation Button Styles */
+    .navbar-brand {
+        font-size: 1.8em;
+        font-weight: bold;
+        color: white;
+    }
+
+    .navbar-links {
+        display: flex; /* Align links horizontally */
+    }
+
     .navbar .nav-btn {
         color: white;
         text-decoration: none;
         font-size: 1.2em;
         padding: 10px 20px;
-        margin: 0 10px;
+        margin: 0 5px; /* Add spacing between buttons */
         border-radius: 5px;
         background-color: #4CAF50; /* Green color */
         transition: background-color 0.3s ease;
@@ -153,15 +161,23 @@
         background-color: #45a049; /* Darker green on hover */
     }
 
-    </style>
+    /* Ensure the body starts below the fixed navbar */
+    body {
+        margin: 0;
+        padding-top: 70px; /* Adjust to match navbar height */
+    }
+</style>
 
-    
-        <nav class="navbar">
-    <a href="downloads.html" class="nav-btn">Go to Downloads</a>
-    <a href="socials.html" class="nav-btn">Go to All Socials</a>
-    <a href="snake.html" class="nav-btn">Go to Snake for KBM</a>
-    <a href="https://www.youtube.com/@x2Beef" target="_blank" class="nav-btn">Visit my YouTube Channel</a>
+  <nav class="navbar">
+    <div class="navbar-brand">x2Beef's Mancave</div>
+    <div class="navbar-links">
+        <a href="downloads.html" class="nav-btn">Go to Downloads</a>
+        <a href="socials.html" class="nav-btn">Go to All Socials</a>
+        <a href="snake.html" class="nav-btn">Go to Snake for KBM</a>
+        <a href="https://www.youtube.com/@x2Beef" target="_blank" class="nav-btn">Visit My YouTube Channel</a>
+    </div>
 </nav>
+
     
 </head>
 <body>
