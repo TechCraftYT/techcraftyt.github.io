@@ -37,7 +37,7 @@ function drawStartScreen() {
   ctx.fillStyle = "white";
   ctx.font = "20px Arial";
   ctx.textAlign = "center";
-  ctx.fillText("Press SPACE to Start", canvas.width / 2, canvas.height / 2);
+  ctx.fillText("This Game is very shitty but Press SPACE to Start", canvas.width / 2, canvas.height / 2);
 }
 
 function drawSnake() {
