@@ -23,15 +23,18 @@
     }
 
     .container {
-        text-align: center; /* Centers text inside the container */
-        background: rgba(255, 255, 255, 0.9); /* Semi-transparent background */
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-        width: 80%; /* Adjust as necessary */
-        max-width: 600px; /* Prevents it from stretching too wide */
-        background: rgba(255, 255, 255, 0.5);
-    }
+    display: flex; /* Enable flexbox for centering */
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Horizontally center items */
+    text-align: center; /* Center-align text inside the container */
+    background: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    width: 80%;
+    max-width: 600px;
+    margin: 0 auto; /* Center the container itself *
+        }
 
     h1 {
         font-size: 2.5em;
@@ -51,17 +54,13 @@
         color: #777;
     }
         
-    iframe {
+  iframe {
     width: 100%; /* Full width of the container */
-    max-width: 560px; /* Restrict to original YouTube aspect ratio */
-    height: 315px; /* Maintain YouTube's aspect ratio (16:9) */
-    border: none; /* Remove border around the iframe */
-    margin: 0 auto; /* Center the iframe */
-    display: block; /* Ensures proper centering */
-    border-radius: 10px; /* Optional: Rounded corners */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Optional: Shadow */
+    max-width: 560px; /* Restrict to YouTube's aspect ratio */
+    height: 315px; /* Maintain 16:9 ratio */
+    border: none; /* Remove border */
+    display: block; /* Ensures block behavior */
 }
-
 
     }
         .youtube-btn {
