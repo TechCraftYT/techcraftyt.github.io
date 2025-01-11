@@ -52,9 +52,16 @@
     }
 
     iframe {
-        margin-top: 20px;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 100%; /* Full width of the container */
+    max-width: 560px; /* Restrict to original YouTube aspect ratio */
+    height: 315px; /* Maintain YouTube's aspect ratio (16:9) */
+    border: none; /* Remove border around the iframe */
+    margin: 0 auto; /* Center the iframe */
+    display: block; /* Ensures proper centering */
+    border-radius: 10px; /* Optional: Rounded corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Optional: Shadow */
+}
+
     }
         .youtube-btn {
             background-color: #FF0000; /* YouTube red color */
