@@ -8,50 +8,53 @@
     <link rel="icon" type="image/png" href="favicon.png">
 
     <style>
-        body {
-            font-family: Arial, sans-serif;
-             background-image: url('https://live.staticflickr.com/65535/51001407257_59b519dfaa_b.jpg');
-             background-size: cover;
-             background-position: center;
-             background-attachment: fixed;
-             background-repeat: no-repeat;
-             height: 100vh;
-             margin: 0; 
-    
-        }
-
-        h1 {
-            font-size: 3em;
-            margin-bottom: 20px;
-        }
-
-        p {
-            font-size: 1.5em;
-            margin-top: 20px;
-        }
-
-       .container {
-      text-align: center; /* Centers text inside the container */
-      background: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-      width: 80%; /* Adjust as necessary */
-      max-width: 600px; /* Prevents it from stretching too wide */
+            body {
+        font-family: Arial, sans-serif;
+        background-image: url('https://live.staticflickr.com/65535/51001407257_59b519dfaa_b.jpg');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+        height: 100vh;
+        margin: 0;
+        display: flex; /* Flexbox to center the container */
+        justify-content: center; /* Horizontal centering */
+        align-items: center; /* Vertical centering */
     }
 
-        img {
-            max-width: 30%;
-            height: auto;
-            border-radius: 10px;
-            margin-top: 20px;
-        }
+    .container {
+        text-align: center; /* Centers text inside the container */
+        background: rgba(255, 255, 255, 0.9); /* Semi-transparent background */
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        width: 80%; /* Adjust as necessary */
+        max-width: 600px; /* Prevents it from stretching too wide */
+    }
 
-        .footer {
-            font-size: 1.2em;
-            margin-top: 40px;
-        }
+    h1 {
+        font-size: 2.5em;
+        margin-bottom: 10px;
+        color: #333;
+    }
 
+    p {
+        font-size: 1.2em;
+        margin-top: 10px;
+        color: #555;
+    }
+
+    .footer {
+        font-size: 1em;
+        margin-top: 20px;
+        color: #777;
+    }
+
+    iframe {
+        margin-top: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
         .youtube-btn {
             background-color: #FF0000; /* YouTube red color */
             color: white;
