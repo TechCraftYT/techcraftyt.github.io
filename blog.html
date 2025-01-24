@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Blog</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 1rem 0;
+        }
+        .container {
+            width: 90%;
+            max-width: 800px;
+            margin: 20px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            margin-top: 0;
+        }
+        .post {
+            border-bottom: 1px solid #ddd;
+            padding: 10px 0;
+        }
+        .post:last-child {
+            border-bottom: none;
+        }
+        .post h2 {
+            margin: 0 0 10px;
+        }
+        .post p {
+            margin: 0 0 10px;
+            color: #555;
+        }
+        .new-post {
+            margin-top: 20px;
+        }
+        .new-post input, .new-post textarea, .new-post button {
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 10px;
+            font-size: 1rem;
+        }
+        .new-post button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .new-post button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>My Secure Blog</h1>
+    </header>
+    <div class="container">
+        <div id="blogPosts">
+            <h1>Recent Posts</h1>
+            <!-- Blog posts will appear here -->
+        </div>
+
+        <div class="new-post">
+            <h1>Add a New Post</h1>
+            <input type="text" id="postTitle" placeholder="Title" required />
+            <textarea id="postContent" placeholder="Content" rows="5" required></textarea>
+            <input type="password" id="postPassword" placeholder="Enter Password" required />
+            <button onclick="addPost()">Add Post</button>
+        </div>
+    </div>
+
+    <script>
+        const blogPosts = document.getElementById('blogPosts');
+
+        // Predefined password
+        const PASSWORD = "YouLikeMenIfYouFindThis";
+
+        // Function to add a new post
+        function addPost() {
+            const title = document.getElementById('postTitle').value.trim();
+            const content = document.getElementById('postContent').value.trim();
+            const password = document.getElementById('postPassword').value;
+
+            // Validate the password
+            if (password !== PASSWORD) {
+                alert("Incorrect password. You are not authorized to add a post.");
+                return;
+            }
+
+            if (title && content) {
+                // Create post elements
+                const postDiv = document.createElement('div');
+                postDiv.classList.add('post');
+                postDiv.innerHTML = `
+                    <h2>${title}</h2>
+                    <p>${content}</p>
+                `;
+                
+                // Add post to the blog
+                blogPosts.appendChild(postDiv);
+
+                // Clear the input fields
+                document.getElementById('postTitle').value = '';
+                document.getElementById('postContent').value = '';
+                document.getElementById('postPassword').value = '';
+            } else {
+                alert('Please fill in both the title and content.');
+            }
+        }
+    </script>
+</body>
+</html>
