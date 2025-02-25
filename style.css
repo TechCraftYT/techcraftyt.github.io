@@ -1,0 +1,39 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+  background-color: hotpink;
+  color: #333;
+  text-align: center;
+}
+
+h1 {
+  font-size: 2.5em;
+  margin-bottom: 10px;
+  color: white;
+}
+
+h2 {
+  font-size: 1.5em;
+  margin-bottom: 20px;
+  color: white;
+}
+
+p {
+  line-height: 1.6;
+  margin-bottom: 20px;
+   color: white;
+}
+
+a {
+  display: inline-block;
+  margin-right: 15px;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+}
+
+a:hover {
+  text-decoration: underline;
+  color: #2980b9;
+}
