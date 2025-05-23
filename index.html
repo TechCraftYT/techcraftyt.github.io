@@ -1,91 +1,85 @@
-<!DOCTYPE html>
 <html>
-<head>
-  <title>Friend Chat</title>
-  <style>
-    body { font-family: sans-serif; background: #2c2f33; color: #fff; margin: 0; padding: 0; }
-    .login, .chat { padding: 20px; max-width: 600px; margin: 50px auto; background: #23272a; border-radius: 10px; }
-    input, button { padding: 10px; margin: 5px 0; border: none; border-radius: 5px; width: 100%; }
-    input { background: #2c2f33; color: white; }
-    button { background: #7289da; color: white; cursor: pointer; }
-    ul { list-style: none; padding: 0; max-height: 300px; overflow-y: scroll; margin-bottom: 10px; }
-    li { background: #99aab5; color: #2c2f33; padding: 8px; border-radius: 5px; margin: 5px 0; }
-    .input-area { display: flex; gap: 10px; }
-    .input-area input { flex: 1; }
-  </style>
-</head>
-<body>
+ <head>
+  <link href="style.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+   <title>Liam's Website</title>
+   <link rel="icon" type="image/png" href="favicon.png"> 
+ </head>
 
-<div class="login">
-  <h2>Login</h2>
-  <input id="user" placeholder="Username">
-  <input id="pass" type="password" placeholder="Password">
-  <button onclick="login()">Login</button>
+ <body>
+   <div class="background-blur"></div>
+  <h1>Liam</h1>
+  <h2>Low Level Software Dev & Device Tinkerer</h2>
+  <p>Welcome to my page! I'm Liam, a software
+   developer who enjoys experimenting and
+   having fun with code. I also love Tech and Fire Alarms</p>
+ 
+   <div class="links-container">
+   <a
+   href="https://instagram.com/x2Beef">Instagram</a>
+<a
+  href="https://youtube.com/@x2beef">YouTube</a>
+  <a
+   href="https://thetechlobby.site">Website</a>
+
+<a href="downloads.html" class="nav-btn">Go to Downloads</a>
+<a href="socials.html" class="nav-btn">Go to All Socials</a>
+<a href="devices.html" class="nav-btn">Go to a list of all my devices!</a>
+
+
+
+
 </div>
 
-<div class="chat" id="chatArea" style="display:none;">
-  <h2>Chat</h2>
-  <ul id="messages"></ul>
-  <div class="input-area">
-    <input id="msg" placeholder="Type a message...">
-    <button onclick="send()">Send</button>
-  </div>
-</div>
+<iframe width="420" height="315"
+class="iframe"
+src="https://www.youtube.com/embed/sbdBrP53C4E">
+</iframe>
 
-<script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
-<script>
-  const backend = 'https://willingunhealthycoins.liampenny5.repl.co'; // Your Replit URL here
-  const socket = io(backend);
 
-  const user = document.getElementById('user');
-  const pass = document.getElementById('pass');
-  const msg = document.getElementById('msg');
-  const messages = document.getElementById('messages');
-  const chatArea = document.getElementById('chatArea');
 
-  function login() {
-    fetch(`${backend}/login`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username: user.value, password: pass.value })
-    }).then(r => {
-      if (r.ok) {
-        alert('✅ Logged in!');
-        chatArea.style.display = 'block';
-        loadMessages();
-      } else {
-        alert('❌ Login failed');
-      }
-    });
-  }
 
-  function send() {
-    if (msg.value.trim() === '') return;
-    const messageToSend = user.value + ': ' + msg.value;
-    socket.emit('chat message', messageToSend);
-    msg.value = '';
-  }
 
-  function loadMessages() {
-    fetch(`${backend}/messages`)
-      .then(r => r.json())
-      .then(data => {
-        messages.innerHTML = '';
-        data.forEach(m => {
-          const li = document.createElement('li');
-          li.textContent = m;
-          messages.appendChild(li);
-        });
-      });
-  }
 
-  socket.on('chat message', (msg) => {
-    const li = document.createElement('li');
-    li.textContent = msg;
-    messages.appendChild(li);
-    messages.scrollTop = messages.scrollHeight; // scroll to bottom
-  });
-</script>
 
-</body>
-</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
