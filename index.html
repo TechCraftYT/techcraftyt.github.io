@@ -34,13 +34,14 @@
 
 <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
 <script>
-  const backend = 'https://your-replit-username.repl.co'; // ← replace this with your Replit app URL
+  const backend = 'https://willingunhealthycoins.liampenny5.repl.co'; // Your Replit URL here
   const socket = io(backend);
 
   const user = document.getElementById('user');
   const pass = document.getElementById('pass');
   const msg = document.getElementById('msg');
   const messages = document.getElementById('messages');
+  const chatArea = document.getElementById('chatArea');
 
   function login() {
     fetch(`${backend}/login`, {
@@ -50,7 +51,7 @@
     }).then(r => {
       if (r.ok) {
         alert('✅ Logged in!');
-        document.getElementById('chatArea').style.display = 'block';
+        chatArea.style.display = 'block';
         loadMessages();
       } else {
         alert('❌ Login failed');
@@ -59,10 +60,10 @@
   }
 
   function send() {
-    if (msg.value.trim()) {
-      socket.emit('chat message', user.value + ': ' + msg.value);
-      msg.value = '';
-    }
+    if (msg.value.trim() === '') return;
+    const messageToSend = user.value + ': ' + msg.value;
+    socket.emit('chat message', messageToSend);
+    msg.value = '';
   }
 
   function loadMessages() {
@@ -78,10 +79,11 @@
       });
   }
 
-  socket.on('chat message', function(msg) {
+  socket.on('chat message', (msg) => {
     const li = document.createElement('li');
     li.textContent = msg;
     messages.appendChild(li);
+    messages.scrollTop = messages.scrollHeight; // scroll to bottom
   });
 </script>
 
