@@ -2,106 +2,50 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Simple Chat</title>
+  <title>Chat App</title>
   <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #36393f;
-      color: #dcddde;
-      margin: 0; padding: 0;
-      display: flex; flex-direction: column; height: 100vh;
-    }
-    #loginArea, #chatArea {
-      max-width: 500px; margin: auto; padding: 1rem;
-    }
-    input {
-      width: 100%;
-      padding: 10px;
-      margin: 0.4rem 0;
-      border-radius: 5px;
-      border: none;
-      font-size: 1rem;
-    }
-    button {
-      width: 100%;
-      padding: 10px;
-      margin: 0.6rem 0;
-      background: #5865f2;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      font-weight: 600;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-    button:hover {
-      background: #4752c4;
-    }
-    ul#messages {
-      list-style: none;
-      padding: 0;
-      margin: 1rem 0;
-      height: 300px;
-      overflow-y: auto;
-      border: 1px solid #2f3136;
-      border-radius: 5px;
-      background: #2f3136;
-    }
-    ul#messages li {
-      padding: 6px 10px;
-      border-bottom: 1px solid #202225;
-      word-wrap: break-word;
-    }
-    #msg {
-      width: calc(100% - 90px);
-      display: inline-block;
-    }
-    #sendBtn {
-      width: 80px;
-      display: inline-block;
-      vertical-align: top;
-      margin-left: 10px;
-    }
+    body { font-family: Arial, sans-serif; background: #2f3136; color: #dcddde; }
+    #chat { max-width: 600px; margin: 20px auto; background: #36393f; padding: 20px; border-radius: 8px; }
+    #messages { list-style-type: none; padding: 0; max-height: 300px; overflow-y: auto; }
+    #messages li { padding: 8px; border-bottom: 1px solid #40444b; }
+    input, button { padding: 10px; border-radius: 5px; border: none; margin-top: 10px; }
+    input { width: 80%; }
+    button { width: 18%; background: #7289da; color: white; cursor: pointer; }
+    button:hover { background: #5b6eae; }
   </style>
 </head>
 <body>
-  <div id="loginArea">
-    <h2>Login or Sign Up</h2>
-    <input id="user" placeholder="Username" autocomplete="username" />
-    <input id="pass" type="password" placeholder="Password" autocomplete="current-password" />
+  <div id="chat">
+    <h2>Chat Login</h2>
+    <input id="user" placeholder="Username" /><br />
+    <input id="pass" type="password" placeholder="Password" /><br />
     <button onclick="login()">Login</button>
     <button onclick="signup()">Sign Up</button>
-  </div>
 
-  <div id="chatArea" style="display:none;">
-    <h2>Chat Room</h2>
     <ul id="messages"></ul>
-    <input id="msg" placeholder="Type a message..." autocomplete="off" />
-    <button id="sendBtn" onclick="send()">Send</button>
+
+    <input id="msg" placeholder="Type message..." />
+    <button onclick="send()">Send</button>
   </div>
 
   <script src="https://cdn.socket.io/4.8.1/socket.io.min.js"></script>
   <script>
-    const backend = 'https://willingunhealthycoins.liampenny5.repl.co'; // your backend URL here
+    const backend = 'https://1a16e3ca-8ef6-4a51-8572-8a6d90a3d86e-00-1c67owuvsw0ky.riker.replit.dev';
     const socket = io(backend);
 
     const user = document.getElementById('user');
     const pass = document.getElementById('pass');
     const msg = document.getElementById('msg');
     const messages = document.getElementById('messages');
-    const chatArea = document.getElementById('chatArea');
-    const loginArea = document.getElementById('loginArea');
-
-    let loggedInUser = null;
 
     function signup() {
       fetch(`${backend}/signup`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username: user.value, password: pass.value })
-      }).then(r => r.text()).then(alert);
+      })
+      .then(r => r.text())
+      .then(alert);
     }
 
     function login() {
@@ -109,50 +53,36 @@
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username: user.value, password: pass.value })
-      }).then(r => {
-        if (r.ok) {
-          alert('✅ Logged in!');
-          loggedInUser = user.value;
-          chatArea.style.display = 'block';
-          loginArea.style.display = 'none';
-          loadMessages();
-        } else {
-          alert('❌ Login failed');
-        }
-      }).catch(() => alert('❌ Network error'));
+      })
+      .then(r => {
+        if (r.ok) alert('Logged in!');
+        else alert('Login failed');
+      });
     }
 
     function send() {
-      if (!loggedInUser) {
-        alert('Please login first!');
-        return;
-      }
-      if (msg.value.trim() === '') return;
-      socket.emit('chat message', `${loggedInUser}: ${msg.value.trim()}`);
+      if (!user.value) return alert('Login first!');
+      socket.emit('chat message', `${user.value}: ${msg.value}`);
       msg.value = '';
     }
 
     socket.on('chat message', msg => {
-      if (!loggedInUser) return;
       const li = document.createElement('li');
       li.textContent = msg;
       messages.appendChild(li);
-      messages.scrollTop = messages.scrollHeight;
+      messages.scrollTop = messages.scrollHeight; // auto scroll down
     });
 
-    function loadMessages() {
-      fetch(`${backend}/messages`)
-        .then(r => r.json())
-        .then(data => {
-          messages.innerHTML = '';
-          data.forEach(msg => {
-            const li = document.createElement('li');
-            li.textContent = msg;
-            messages.appendChild(li);
-          });
-          messages.scrollTop = messages.scrollHeight;
+    // Load chat history
+    fetch(`${backend}/messages`)
+      .then(r => r.json())
+      .then(data => {
+        data.forEach(msg => {
+          const li = document.createElement('li');
+          li.textContent = msg;
+          messages.appendChild(li);
         });
-    }
+      });
   </script>
 </body>
 </html>
