@@ -1,135 +1,91 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>ChatCord</title>
+  <title>Friend Chat</title>
   <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #2f3136;
-      color: white;
-    }
-    .app {
-      display: flex;
-      height: 100vh;
-    }
-    .sidebar {
-      width: 250px;
-      background-color: #202225;
-      padding: 20px;
-      box-sizing: border-box;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    .sidebar input, .sidebar button {
-      width: 100%;
-      padding: 8px;
-      border: none;
-      border-radius: 5px;
-    }
-    .sidebar input {
-      background-color: #2f3136;
-      color: white;
-    }
-    .sidebar button {
-      background-color: #5865f2;
-      color: white;
-      cursor: pointer;
-    }
-    .chat {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      background-color: #36393f;
-    }
-    #messages {
-      list-style: none;
-      padding: 10px;
-      overflow-y: auto;
-      flex: 1;
-    }
-    #messages li {
-      margin-bottom: 10px;
-      background-color: #40444b;
-      padding: 8px 12px;
-      border-radius: 5px;
-    }
-    .input-area {
-      display: flex;
-      padding: 10px;
-      background-color: #40444b;
-    }
-    .input-area input {
-      flex: 1;
-      padding: 10px;
-      background-color: #2f3136;
-      color: white;
-      border: none;
-      border-radius: 5px;
-    }
-    .input-area button {
-      padding: 10px;
-      margin-left: 10px;
-      background-color: #5865f2;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
+    body { font-family: sans-serif; background: #2c2f33; color: #fff; margin: 0; padding: 0; }
+    .login, .chat { padding: 20px; max-width: 600px; margin: 50px auto; background: #23272a; border-radius: 10px; }
+    input, button { padding: 10px; margin: 5px 0; border: none; border-radius: 5px; width: 100%; }
+    input { background: #2c2f33; color: white; }
+    button { background: #7289da; color: white; cursor: pointer; }
+    ul { list-style: none; padding: 0; max-height: 300px; overflow-y: scroll; margin-bottom: 10px; }
+    li { background: #99aab5; color: #2c2f33; padding: 8px; border-radius: 5px; margin: 5px 0; }
+    .input-area { display: flex; gap: 10px; }
+    .input-area input { flex: 1; }
   </style>
 </head>
 <body>
-  <div class="app">
-    <div class="sidebar">
-      <h2>ChatCord</h2>
-      <input id="user" placeholder="Username">
-      <input id="pass" type="password" placeholder="Password">
-      <button onclick="signup()">Sign Up</button>
-      <button onclick="login()">Login</button>
-    </div>
-    <div class="chat">
-      <ul id="messages"></ul>
-      <div class="input-area">
-        <input id="msg" placeholder="Type your message...">
-        <button onclick="send()">Send</button>
-      </div>
-    </div>
+
+<div class="login">
+  <h2>Login</h2>
+  <input id="user" placeholder="Username">
+  <input id="pass" type="password" placeholder="Password">
+  <button onclick="login()">Login</button>
+</div>
+
+<div class="chat" id="chatArea" style="display:none;">
+  <h2>Chat</h2>
+  <ul id="messages"></ul>
+  <div class="input-area">
+    <input id="msg" placeholder="Type a message...">
+    <button onclick="send()">Send</button>
   </div>
-  <script src="https://cdn.socket.io/4.6.1/socket.io.min.js"></script>
-  <script>
-    const backend = 'https://your-backend.repl.co'; // ← replace this
-    const socket = io(backend);
+</div>
 
-    function signup() {
-      fetch(`${backend}/signup`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username: user.value, password: pass.value })
-      }).then(r => r.text()).then(alert);
-    }
+<script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+<script>
+  const backend = 'https://willingunhealthycoins.liampenny5.repl.co'; // Your Replit URL here
+  const socket = io(backend);
 
-    function login() {
-      fetch(`${backend}/login`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username: user.value, password: pass.value })
-      }).then(r => {
-        if (r.ok) alert('Logged in!');
-        else alert('Login failed');
-      });
-    }
+  const user = document.getElementById('user');
+  const pass = document.getElementById('pass');
+  const msg = document.getElementById('msg');
+  const messages = document.getElementById('messages');
+  const chatArea = document.getElementById('chatArea');
 
-    function send() {
-      socket.emit('chat message', `${user.value}: ${msg.value}`);
-      msg.value = '';
-    }
-
-    socket.on('chat message', msg => {
-      const li = document.createElement('li');
-      li.textContent = msg;
-      messages.appendChild(li);
+  function login() {
+    fetch(`${backend}/login`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username: user.value, password: pass.value })
+    }).then(r => {
+      if (r.ok) {
+        alert('✅ Logged in!');
+        chatArea.style.display = 'block';
+        loadMessages();
+      } else {
+        alert('❌ Login failed');
+      }
     });
-  </script>
+  }
+
+  function send() {
+    if (msg.value.trim() === '') return;
+    const messageToSend = user.value + ': ' + msg.value;
+    socket.emit('chat message', messageToSend);
+    msg.value = '';
+  }
+
+  function loadMessages() {
+    fetch(`${backend}/messages`)
+      .then(r => r.json())
+      .then(data => {
+        messages.innerHTML = '';
+        data.forEach(m => {
+          const li = document.createElement('li');
+          li.textContent = m;
+          messages.appendChild(li);
+        });
+      });
+  }
+
+  socket.on('chat message', (msg) => {
+    const li = document.createElement('li');
+    li.textContent = msg;
+    messages.appendChild(li);
+    messages.scrollTop = messages.scrollHeight; // scroll to bottom
+  });
+</script>
+
 </body>
 </html>
