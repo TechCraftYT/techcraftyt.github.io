@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Chat with Signup & Login</title>
+  <title>RTT Tactical</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -96,11 +96,12 @@
     let loggedInUser = null;
 
     signupBtn.onclick = () => {
-      if (!user.value || !pass.value) return alert('Enter username and password');
+      const usernameLower = user.value.trim().toLowerCase();
+      if (!usernameLower || !pass.value) return alert('Enter username and password');
       fetch(`${backend}/signup`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username: user.value, password: pass.value })
+        body: JSON.stringify({ username: usernameLower, password: pass.value })
       })
       .then(res => {
         if (res.ok) return res.text();
@@ -111,16 +112,17 @@
     };
 
     loginBtn.onclick = () => {
-      if (!user.value || !pass.value) return alert('Enter username and password');
+      const usernameLower = user.value.trim().toLowerCase();
+      if (!usernameLower || !pass.value) return alert('Enter username and password');
       fetch(`${backend}/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username: user.value, password: pass.value })
+        body: JSON.stringify({ username: usernameLower, password: pass.value })
       })
       .then(res => {
         if (res.ok) {
           alert('Logged in!');
-          loggedInUser = user.value;
+          loggedInUser = usernameLower;
           user.disabled = true;
           pass.disabled = true;
           loginBtn.disabled = true;
@@ -150,7 +152,7 @@
       messages.scrollTop = messages.scrollHeight;
     });
 
-    // Load existing messages on page load (only if logged in)
+    // Load existing messages on page load
     fetch(`${backend}/messages`)
       .then(res => res.json())
       .then(data => {
