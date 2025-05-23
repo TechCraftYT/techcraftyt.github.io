@@ -30,3 +30,14 @@ socket.on('chat message', msg => {
   li.textContent = msg;
   messages.appendChild(li);
 });
+
+// Fetch and show chat history
+fetch(`${backend}/messages`)
+  .then(r => r.json())
+  .then(data => {
+    data.forEach(msg => {
+      const li = document.createElement('li');
+      li.textContent = msg;
+      messages.appendChild(li);
+    });
+  });
