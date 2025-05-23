@@ -1,4 +1,4 @@
-const backend = 'https://1a16e3ca-8ef6-4a51-8572-8a6d90a3d86e-00-1c67owuvsw0ky.riker.replit.dev/'; // replace with your actual Replit URL
+const backend = 'https://willingunhealthycoins.liampenny5.repl.co'; // replace with your actual Replit URL
 const socket = io(backend);
 
 function signup() {
