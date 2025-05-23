@@ -2,7 +2,82 @@
 <html>
 <head>
   <title>ChatCord</title>
-  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #2f3136;
+      color: white;
+    }
+    .app {
+      display: flex;
+      height: 100vh;
+    }
+    .sidebar {
+      width: 250px;
+      background-color: #202225;
+      padding: 20px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .sidebar input, .sidebar button {
+      width: 100%;
+      padding: 8px;
+      border: none;
+      border-radius: 5px;
+    }
+    .sidebar input {
+      background-color: #2f3136;
+      color: white;
+    }
+    .sidebar button {
+      background-color: #5865f2;
+      color: white;
+      cursor: pointer;
+    }
+    .chat {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      background-color: #36393f;
+    }
+    #messages {
+      list-style: none;
+      padding: 10px;
+      overflow-y: auto;
+      flex: 1;
+    }
+    #messages li {
+      margin-bottom: 10px;
+      background-color: #40444b;
+      padding: 8px 12px;
+      border-radius: 5px;
+    }
+    .input-area {
+      display: flex;
+      padding: 10px;
+      background-color: #40444b;
+    }
+    .input-area input {
+      flex: 1;
+      padding: 10px;
+      background-color: #2f3136;
+      color: white;
+      border: none;
+      border-radius: 5px;
+    }
+    .input-area button {
+      padding: 10px;
+      margin-left: 10px;
+      background-color: #5865f2;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
   <div class="app">
@@ -22,6 +97,39 @@
     </div>
   </div>
   <script src="https://cdn.socket.io/4.6.1/socket.io.min.js"></script>
-  <script src="chat.js"></script>
+  <script>
+    const backend = 'https://your-backend.repl.co'; // ← replace this
+    const socket = io(backend);
+
+    function signup() {
+      fetch(`${backend}/signup`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username: user.value, password: pass.value })
+      }).then(r => r.text()).then(alert);
+    }
+
+    function login() {
+      fetch(`${backend}/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username: user.value, password: pass.value })
+      }).then(r => {
+        if (r.ok) alert('Logged in!');
+        else alert('Login failed');
+      });
+    }
+
+    function send() {
+      socket.emit('chat message', `${user.value}: ${msg.value}`);
+      msg.value = '';
+    }
+
+    socket.on('chat message', msg => {
+      const li = document.createElement('li');
+      li.textContent = msg;
+      messages.appendChild(li);
+    });
+  </script>
 </body>
 </html>
